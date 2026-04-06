@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dian Ariza · F&B Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F8F4ED;
+    --cream-dark: #EDE6D6;
+    --cream-mid: #F2EBE0;
+    --gold: #B8963E;
+    --gold-light: #D4AF6B;
+    --gold-dark: #8B6914;
+    --gold-pale: #F0E4C4;
+    --charcoal: #2C2C2C;
+    --charcoal-light: #4A4A4A;
+    --warm-gray: #7A7068;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ORNAMENT */
+  .ornament { color: var(--gold-light); letter-spacing: 0.15em; font-size: 11px; }
+
+  /* HEADER */
+  header {
+    background: var(--charcoal);
+    position: relative;
+    overflow: hidden;
+    padding: 56px 0 48px;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: 
+      repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(184,150,62,0.04) 30px, rgba(184,150,62,0.04) 31px),
+      repeating-linear-gradient(-45deg, transparent, transparent 30px, rgba(184,150,62,0.04) 30px, rgba(184,150,62,0.04) 31px);
+  }
+  header::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .avatar-wrap {
+    width: 130px; height: 170px;
+    border-radius: 4px;
+    border: 2px solid var(--gold);
+    padding: 3px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+    display: flex; align-items: center; justify-content: center;
+  }
+  .avatar-inner {
+    width: 100%; height: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    background: #1a1a14;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .header-text { }
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+  }
+  .title-role {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .header-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+  }
+  .contact-item {
+    font-size: 11px;
+    color: #A89880;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 300;
+  }
+  .contact-item:hover { color: var(--gold-light); }
+  .contact-item svg { width: 12px; height: 12px; stroke: var(--gold); fill: none; flex-shrink: 0; }
+
+  /* METRICS STRIP */
+  .metrics-strip {
+    background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 50%, var(--gold-light) 100%);
+    padding: 0;
+  }
+  .metrics-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .metric {
+    padding: 20px 24px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.2);
+    position: relative;
+  }
+  .metric:last-child { border-right: none; }
+  .metric-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .metric-label {
+    font-size: 8.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    font-weight: 500;
+  }
+
+  /* MAIN LAYOUT */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 40px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+  }
+
+  /* SIDEBAR */
+  aside { }
+  .sidebar-block { margin-bottom: 32px; }
+  .sidebar-title {
+    font-size: 8px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--gold-pale);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sidebar-title::before {
+    content: '';
+    display: inline-block;
+    width: 16px; height: 1px;
+    background: var(--gold);
+  }
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 11.5px;
+    color: var(--charcoal-light);
+  }
+  .skill-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .lang-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 9px;
+  }
+  .lang-name { font-size: 11.5px; color: var(--charcoal-light); }
+  .lang-level {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--warm-gray);
+    font-style: italic;
+  }
+  .lang-bar {
+    height: 2px;
+    background: var(--gold-pale);
+    border-radius: 2px;
+    margin-top: 3px;
+    margin-bottom: 10px;
+  }
+  .lang-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--gold-dark), var(--gold-light)); }
+  .tech-tag {
+    display: inline-block;
+    padding: 3px 9px;
+    background: var(--cream-dark);
+    border: 1px solid var(--gold-pale);
+    border-radius: 2px;
+    font-size: 10px;
+    color: var(--charcoal-light);
+    margin: 2px 2px 2px 0;
+    letter-spacing: 0.04em;
+  }
+  .edu-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--charcoal);
+    margin-bottom: 2px;
+  }
+  .edu-program {
+    font-size: 11px;
+    color: var(--warm-gray);
+    margin-bottom: 1px;
+  }
+  .edu-year {
+    font-size: 10px;
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  /* MAIN CONTENT */
+  section { margin-bottom: 36px; }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--charcoal);
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold-pale), transparent);
+  }
+  .section-sub {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  /* SUMMARY */
+  .summary-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.75;
+    color: var(--charcoal-light);
+    padding: 18px 20px;
+    border-left: 2px solid var(--gold);
+    background: var(--cream-mid);
+    border-radius: 0 4px 4px 0;
+    font-weight: 300;
+  }
+
+  /* EXPERIENCE */
+  .exp-item {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 24px;
+  }
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 6px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    background: var(--cream);
+  }
+  .exp-item::after {
+    content: '';
+    position: absolute;
+    left: 2.5px; top: 14px; bottom: -16px;
+    width: 1px;
+    background: var(--gold-pale);
+  }
+  .exp-item:last-child::after { display: none; }
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2px;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .exp-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--charcoal);
+    letter-spacing: 0.02em;
+  }
+  .exp-period {
+    font-size: 9.5px;
+    color: var(--warm-gray);
+    background: var(--gold-pale);
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+  }
+  .exp-company {
+    font-size: 11px;
+    color: var(--gold-dark);
+    font-weight: 500;
+    margin-bottom: 10px;
+    letter-spacing: 0.03em;
+  }
+  .exp-badge {
+    display: inline-block;
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-pale);
+    padding: 1px 6px;
+    border-radius: 2px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .exp-bullets { list-style: none; padding: 0; }
+  .exp-bullets li {
+    font-size: 11.5px;
+    color: var(--charcoal-light);
+    padding: 3px 0;
+    display: flex;
+    gap: 8px;
+    line-height: 1.6;
+  }
+  .exp-bullets li::before {
+    content: '›';
+    color: var(--gold);
+    font-size: 14px;
+    flex-shrink: 0;
+    line-height: 1.4;
+  }
+
+  /* REFERENCES */
+  .refs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .ref-card {
+    background: var(--cream-mid);
+    border: 1px solid var(--gold-pale);
+    border-top: 2px solid var(--gold);
+    padding: 14px;
+    border-radius: 2px;
+  }
+  .ref-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--charcoal);
+    margin-bottom: 3px;
+  }
+  .ref-title {
+    font-size: 10px;
+    color: var(--warm-gray);
+    line-height: 1.4;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--gold-pale);
+    padding: 20px 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: var(--warm-gray);
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  header { animation: fadeUp 0.6s ease both; }
+  .metrics-strip { animation: fadeUp 0.6s 0.1s ease both; }
+  main { animation: fadeUp 0.6s 0.2s ease both; }
+
+  @media print {
+    body { font-size: 11px; }
+    header { padding: 32px 0 28px; }
+    main { padding: 28px 32px; gap: 32px; }
+    .metrics-strip { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="avatar-wrap">
+      <div class="avatar-inner" style="background:none;padding:0;overflow:hidden;"><img src="data:image/jpeg;base64,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" alt="Dian Ariza" style="width:100%;height:100%;object-fit:cover;object-position:center 10%;"></div>
+    </div>
+    <div class="header-text">
+      <div class="eyebrow">Food &amp; Beverage Professional · Jakarta, Indonesia</div>
+      <h1>Dian Ariza</h1>
+      <div class="title-role">Food &amp; Beverage Manager · Pre-Opening Specialist</div>
+      <div class="header-contacts">
+        <a href="mailto:dian.ariza79@gmail.com" class="contact-item">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+          dian.ariza79@gmail.com
+        </a>
+        <a href="tel:+6289663878109" class="contact-item">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+          +62 896 6387 8109
+        </a>
+        <a href="https://linkedin.com/in/dian-ariza" class="contact-item" target="_blank">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"/></svg>
+          linkedin.com/in/dian-ariza
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- METRICS -->
+<div class="metrics-strip">
+  <div class="metrics-inner">
+    <div class="metric">
+      <div class="metric-num">20+</div>
+      <div class="metric-label">Years Experience</div>
+    </div>
+    <div class="metric">
+      <div class="metric-num">15%</div>
+      <div class="metric-label">Revenue Growth YoY</div>
+    </div>
+    <div class="metric">
+      <div class="metric-num">35%</div>
+      <div class="metric-label">Turnover Reduction</div>
+    </div>
+    <div class="metric">
+      <div class="metric-num">93%+</div>
+      <div class="metric-label">Guest Satisfaction</div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- SIDEBAR -->
+  <aside>
+    <!-- CORE SKILLS -->
+    <div class="sidebar-block">
+      <div class="sidebar-title">Core Skills</div>
+      <div class="skill-item"><span class="skill-dot"></span>F&B Operations &amp; P&L</div>
+      <div class="skill-item"><span class="skill-dot"></span>Pre-Opening Leadership</div>
+      <div class="skill-item"><span class="skill-dot"></span>Revenue Optimization</div>
+      <div class="skill-item"><span class="skill-dot"></span>Team Building &amp; Training</div>
+      <div class="skill-item"><span class="skill-dot"></span>Menu Development</div>
+      <div class="skill-item"><span class="skill-dot"></span>Cost &amp; Supplier Control</div>
+      <div class="skill-item"><span class="skill-dot"></span>MICE &amp; Banquet Events</div>
+      <div class="skill-item"><span class="skill-dot"></span>Guest Experience Design</div>
+      <div class="skill-item"><span class="skill-dot"></span>HACCP / Food Safety</div>
+      <div class="skill-item"><span class="skill-dot"></span>Marketing &amp; Promotions</div>
+    </div>
+
+    <!-- LANGUAGES -->
+    <div class="sidebar-block">
+      <div class="sidebar-title">Languages</div>
+      <div class="lang-row">
+        <span class="lang-name">English</span>
+        <span class="lang-level">Fluent</span>
+      </div>
+      <div class="lang-bar"><div class="lang-fill" style="width:90%"></div></div>
+      <div class="lang-row">
+        <span class="lang-name">German</span>
+        <span class="lang-level">Basic</span>
+      </div>
+      <div class="lang-bar"><div class="lang-fill" style="width:30%"></div></div>
+      <div class="lang-row">
+        <span class="lang-name">French</span>
+        <span class="lang-level">Basic</span>
+      </div>
+      <div class="lang-bar"><div class="lang-fill" style="width:25%"></div></div>
+    </div>
+
+    <!-- TECHNOLOGY -->
+    <div class="sidebar-block">
+      <div class="sidebar-title">Technology</div>
+      <span class="tech-tag">OPERA PMS</span>
+      <span class="tech-tag">MICROS POS</span>
+      <span class="tech-tag">VHP POS</span>
+      <span class="tech-tag">RAPTOR POS</span>
+      <span class="tech-tag">POWERPRO</span>
+      <span class="tech-tag">MS Office</span>
+      <span class="tech-tag">Google Workspace</span>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="sidebar-block">
+      <div class="sidebar-title">Education</div>
+      <div class="edu-name">Universitas Terbuka</div>
+      <div class="edu-program">Management of Information</div>
+      <div class="edu-year">2000 – 2001</div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div>
+    <!-- SUMMARY -->
+    <section>
+      <div class="section-title">Profile</div>
+      <div class="section-sub">Professional Summary</div>
+      <div class="summary-text">
+        Results-driven F&amp;B Manager with 20+ years in Jakarta's top luxury hotels. Pre-opening specialist with a strong record of building high-performing teams, optimizing revenue, and delivering five-star guest experiences. Seeking a F&amp;B Manager role to drive operational excellence and measurable growth.
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section>
+      <div class="section-title">Experience</div>
+      <div class="section-sub">Professional Career · 2000 – Present</div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">Food &amp; Beverage Manager</div>
+          <div class="exp-period">2023 – Present</div>
+        </div>
+        <div class="exp-company">Hotel Dafam Enkadeli Thamrin, Jakarta <span class="exp-badge">Pre-Opening</span></div>
+        <ul class="exp-bullets">
+          <li>Pre-opening team lead: built F&amp;B department from zero — SOPs, staffing, service standards.</li>
+          <li>Grew F&amp;B revenue 15% YoY via menu repositioning and upselling programs.</li>
+          <li>Trained 10+ staff; cut onboarding time 35% through structured training modules.</li>
+          <li>Reduced food costs 10% via supplier partnerships; cut wastage 18% via inventory system.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">Outlet Manager – Tigadari</div>
+          <div class="exp-period">2019 – 2023</div>
+        </div>
+        <div class="exp-company">Plataran Senayan GBK, Jakarta <span class="exp-badge">Pre-Opening</span></div>
+        <ul class="exp-bullets">
+          <li>Led full pre-opening: recruitment, menu planning, and operational launch.</li>
+          <li>Managed 45+ person team; weekly KPI reviews improved scores by 15%.</li>
+          <li>Optimized scheduling to cut overtime 12%; menu development drove +20% avg spend per cover.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">Restaurant &amp; Banquet Asst. Manager</div>
+          <div class="exp-period">2017 – 2019</div>
+        </div>
+        <div class="exp-company">Hotel Mercure (Duta Mall), Banjarmasin</div>
+        <ul class="exp-bullets">
+          <li>Managed F&amp;B operations for 141-room property; coordinated banquets for 200+ guests, 95% satisfaction.</li>
+          <li>Mentored 10 staff → 3 promoted; reduced turnover 35% through structured career development.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">Room Service Captain Leader</div>
+          <div class="exp-period">2015 – 2017</div>
+        </div>
+        <div class="exp-company">Hotel Gran Melia, Jakarta</div>
+        <ul class="exp-bullets">
+          <li>Led 10-person team for 24/7 in-room dining at 500-room 5-star property; 95% order accuracy.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">Progressive Rise · Waiter → Captain</div>
+          <div class="exp-period">2000 – 2015</div>
+        </div>
+        <div class="exp-company">Hotel Gran Melia Jakarta</div>
+        <ul class="exp-bullets">
+          <li>14-year career across Tien Chao, Yoshi Izakaya, Colvmbus Fine Dining, La Terraza, Café Gran Via, and Banquet MICE — mastering fine dining service and large-scale event management at Jakarta's flagship 5-star property.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- REFERENCES -->
+    <section>
+      <div class="section-title">References</div>
+      <div class="section-sub">Available on Request</div>
+      <div class="refs-grid">
+        <div class="ref-card">
+          <div class="ref-name">Eduard R. Pangkerego</div>
+          <div class="ref-title">COO, Artotel Group Indonesia</div>
+        </div>
+        <div class="ref-card">
+          <div class="ref-name">Imran Beny Berlian</div>
+          <div class="ref-title">GM, Dafam Enkadeli Thamrin</div>
+        </div>
+        <div class="ref-card">
+          <div class="ref-name">Roheman</div>
+          <div class="ref-title">GM, Swisbell Hotel Panakukang</div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-brand">Dian Ariza</div>
+  <div>F&amp;B Manager · Jakarta, Indonesia · dian.ariza79@gmail.com</div>
+</footer>
+
+</body>
+</html>
