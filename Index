@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dian Ariza · F&B Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --deep: #111111;
+    --card: #161616;
+    --cream: #f5f0e8;
+    --cream-soft: #ede7d9;
+    --cream-muted: #c4b99a;
+    --gold: #c9a84c;
+    --gold-light: #e4c87a;
+    --gold-dim: #8a6e30;
+    --gold-shine: #f5d98a;
+    --white: #fafaf8;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 900;
+    padding: 28px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(2px);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--cream-muted);
+    text-decoration: none;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0 60px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(201,168,76,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%),
+      linear-gradient(135deg, #0a0a0a 0%, #111111 50%, #0d0d0d 100%);
+  }
+
+  /* Decorative gold lines */
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--gold-dim), transparent);
+    opacity: 0.4;
+    right: 38%;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    padding-top: 80px;
+  }
+
+  .hero-text { }
+
+  .hero-eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.0;
+    color: var(--cream);
+    letter-spacing: 0.02em;
+    margin-bottom: 8px;
+  }
+
+  .hero-name span {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 300;
+    color: var(--cream-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+
+  .hero-divider {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin-bottom: 36px;
+  }
+
+  .hero-bio {
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: var(--cream-muted);
+    max-width: 480px;
+    font-weight: 300;
+  }
+
+  .hero-cta {
+    margin-top: 48px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    padding: 14px 36px;
+    border: 1px solid var(--gold);
+    color: var(--black);
+    background: var(--gold);
+    text-decoration: none;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: 'Raleway', sans-serif;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    border-color: var(--gold-light);
+  }
+
+  .btn-secondary {
+    color: var(--cream-muted);
+    text-decoration: none;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn-secondary::after {
+    content: '→';
+    font-size: 1rem;
+  }
+
+  .btn-secondary:hover { color: var(--gold); }
+
+  /* HERO RIGHT - STATS */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .stat-card {
+    background: var(--card);
+    padding: 36px 32px;
+    border: 1px solid rgba(201,168,76,0.1);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--gold);
+    transition: height 0.4s ease;
+  }
+
+  .stat-card:hover { border-color: rgba(201,168,76,0.3); }
+  .stat-card:hover::before { height: 100%; }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream-muted);
+    line-height: 1.5;
+  }
+
+  /* ===== SECTION SHARED ===== */
+  section {
+    padding: 120px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: 80px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .section-tag {
+    font-size: 0.58rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.1;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .section-line {
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(to right, var(--gold-dim), transparent);
+    margin-bottom: 8px;
+  }
+
+  /* ===== EXPERIENCE ===== */
+  .experience-wrapper {
+    position: relative;
+  }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 60px;
+    margin-bottom: 64px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .exp-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .exp-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .exp-meta { padding-top: 6px; }
+
+  .exp-period {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .exp-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid rgba(201,168,76,0.2);
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .exp-location {
+    font-size: 0.65rem;
+    color: var(--cream-muted);
+    opacity: 0.6;
+  }
+
+  .exp-body {}
+
+  .exp-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  .exp-company {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .exp-bullets { list-style: none; }
+
+  .exp-bullets li {
+    font-size: 0.8rem;
+    color: var(--cream-muted);
+    line-height: 1.8;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+    font-weight: 300;
+  }
+
+  .exp-bullets li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--gold-dim);
+    font-size: 0.4rem;
+    top: 7px;
+  }
+
+  /* ===== SKILLS GRID ===== */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .skill-card {
+    background: var(--card);
+    padding: 40px 36px;
+    border: 1px solid rgba(201,168,76,0.08);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+
+  .skill-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), var(--gold-light));
+    transition: width 0.4s ease;
+  }
+
+  .skill-card:hover { background: #1a1a1a; }
+  .skill-card:hover::after { width: 100%; }
+
+  .skill-icon {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .skill-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .skill-desc {
+    font-size: 0.72rem;
+    color: var(--cream-muted);
+    line-height: 1.7;
+    opacity: 0.7;
+  }
+
+  /* ===== METRICS BANNER ===== */
+  .metrics-banner {
+    background: var(--card);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 80px 60px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .metric-item {
+    text-align: center;
+    padding: 40px 20px;
+    border-right: 1px solid rgba(201,168,76,0.1);
+    position: relative;
+  }
+
+  .metric-item:last-child { border-right: none; }
+
+  .metric-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .metric-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cream-muted);
+    line-height: 1.6;
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-section {
+    background: var(--deep);
+    padding: 120px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  .contact-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.06), transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+  }
+
+  .contact-link:hover { transform: translateY(-4px); }
+
+  .contact-link-icon {
+    width: 52px;
+    height: 52px;
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    color: var(--gold);
+  }
+
+  .contact-link:hover .contact-link-icon {
+    background: var(--gold);
+    color: var(--black);
+    border-color: var(--gold);
+  }
+
+  .contact-link-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream-muted);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--black);
+    border-top: 1px solid rgba(201,168,76,0.1);
+    padding: 40px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+  }
+
+  .footer-copy {
+    font-size: 0.6rem;
+    color: var(--cream-muted);
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+  }
+
+  /* ===== DECORATIVE ELEMENTS ===== */
+  .gold-line-h {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
+  }
+
+  /* ===== LANGUAGES & TECH ===== */
+  .tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 60px;
+  }
+
+  .tag {
+    padding: 8px 20px;
+    border: 1px solid rgba(201,168,76,0.2);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream-muted);
+    transition: all 0.3s ease;
+  }
+
+  .tag:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .tag.gold {
+    border-color: rgba(201,168,76,0.5);
+    color: var(--gold);
+  }
+
+  /* ===== EDUCATION ===== */
+  .edu-card {
+    background: var(--card);
+    border: 1px solid rgba(201,168,76,0.1);
+    padding: 48px;
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+  }
+
+  .edu-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--gold-dim);
+    font-weight: 300;
+    white-space: nowrap;
+    min-width: 120px;
+    padding-top: 4px;
+  }
+
+  .edu-degree {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .edu-school {
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  /* ===== SCROLL ANIMATIONS ===== */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== GOLD ORNAMENT ===== */
+  .ornament {
+    text-align: center;
+    color: var(--gold-dim);
+    font-size: 1.2rem;
+    letter-spacing: 0.5em;
+    margin: 40px 0;
+    opacity: 0.5;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    nav { padding: 24px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 0 24px; }
+    .hero-content { grid-template-columns: 1fr; gap: 48px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    section { padding: 80px 24px; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .metrics-banner { grid-template-columns: 1fr 1fr; padding: 60px 24px; }
+    .exp-item { grid-template-columns: 1fr; gap: 16px; }
+    .contact-section { padding: 80px 24px; }
+    footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
+  }
+
+  /* ===== PAGE LOAD ANIMATION ===== */
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  nav { animation: fadeInDown 0.8s ease forwards; }
+  .hero-eyebrow { animation: fadeInUp 0.8s 0.3s ease both; }
+  .hero-name { animation: fadeInUp 0.8s 0.5s ease both; }
+  .hero-title { animation: fadeInUp 0.8s 0.6s ease both; }
+  .hero-divider { animation: fadeInUp 0.8s 0.7s ease both; }
+  .hero-bio { animation: fadeInUp 0.8s 0.8s ease both; }
+  .hero-cta { animation: fadeInUp 0.8s 0.9s ease both; }
+  .hero-stats { animation: fadeInUp 0.8s 1.0s ease both; }
+
+  .gold-shimmer {
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-shine) 50%, var(--gold) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Dian Ariza</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-eyebrow">F&B Leadership · Luxury Hospitality</div>
+      <h1 class="hero-name">Dian<br><span>Ariza</span></h1>
+      <div class="hero-title">Food & Beverage Manager</div>
+      <div class="hero-divider"></div>
+      <p class="hero-bio">
+        Results-driven F&B leader with 20+ years crafting exceptional dining experiences at Jakarta's most prestigious luxury hotels. Pre-opening specialist with a proven track record of building elite teams and delivering measurable revenue growth.
+      </p>
+      <div class="hero-cta">
+        <a href="mailto:dian.ariza79@gmail.com" class="btn-primary">Get In Touch</a>
+        <a href="#experience" class="btn-secondary">View Experience</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">20<span style="font-size:1.2rem">+</span></div>
+        <div class="stat-label">Years of Luxury<br>Hospitality</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">15<span style="font-size:1.2rem">%</span></div>
+        <div class="stat-label">YoY Revenue<br>Growth Achieved</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">93<span style="font-size:1.2rem">%+</span></div>
+        <div class="stat-label">Guest Satisfaction<br>Score</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">5<span style="font-size:1.2rem">★</span></div>
+        <div class="stat-label">Pre-Opening<br>Specialist</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gold-line-h"></div>
+
+<!-- METRICS BANNER -->
+<div class="metrics-banner" id="achievements">
+  <div class="metric-item fade-up">
+    <div class="metric-num gold-shimmer">15%</div>
+    <div class="metric-label">YoY Revenue<br>Growth</div>
+  </div>
+  <div class="metric-item fade-up" style="transition-delay:0.1s">
+    <div class="metric-num gold-shimmer">18%</div>
+    <div class="metric-label">Wastage<br>Reduced</div>
+  </div>
+  <div class="metric-item fade-up" style="transition-delay:0.2s">
+    <div class="metric-num gold-shimmer">35%</div>
+    <div class="metric-label">Staff Turnover<br>Drop</div>
+  </div>
+  <div class="metric-item fade-up" style="transition-delay:0.3s">
+    <div class="metric-num gold-shimmer">93%+</div>
+    <div class="metric-label">Guest<br>Satisfaction</div>
+  </div>
+</div>
+
+<div class="gold-line-h"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Career Journey</div>
+      <h2 class="section-title">Professional<br><em>Experience</em></h2>
+    </div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="experience-wrapper">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">2023 — Present</div>
+        <div class="exp-tag">Current Role</div>
+        <div class="exp-location">Jakarta, Indonesia</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Food & Beverage Manager</div>
+        <div class="exp-company">Hotel Dafam Enkadeli Thamrin</div>
+        <ul class="exp-bullets">
+          <li>Pre-opening team lead: architected entire F&B department from zero — SOPs, staffing structures, and five-star service standards.</li>
+          <li>Drove F&B revenue 15% YoY through strategic menu repositioning and a comprehensive upselling program.</li>
+          <li>Developed and trained 10+ staff; reduced onboarding time by 35% through structured training modules.</li>
+          <li>Reduced food costs 10% via strategic supplier partnerships; cut wastage 18% through an advanced inventory management system.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">2019 — 2023</div>
+        <div class="exp-tag">Pre-Opening</div>
+        <div class="exp-location">Jakarta, Indonesia</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Outlet Manager — Tigadari</div>
+        <div class="exp-company">Plataran Senayan GBK</div>
+        <ul class="exp-bullets">
+          <li>Led full pre-opening launch: end-to-end recruitment, curated menu planning, and operational setup.</li>
+          <li>Managed a 45+ person team; implemented weekly KPI review framework that improved performance scores by 15%.</li>
+          <li>Optimized scheduling to reduce overtime by 12%; menu development initiatives drove a +20% increase in average spend per cover.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">2017 — 2019</div>
+        <div class="exp-tag">Management</div>
+        <div class="exp-location">Banjarmasin, Indonesia</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Restaurant & Banquet Asst. Manager</div>
+        <div class="exp-company">Hotel Mercure, Duta Mall</div>
+        <ul class="exp-bullets">
+          <li>Managed F&B operations for a 141-room property; successfully coordinated banquet events for 200+ guests achieving 95% satisfaction.</li>
+          <li>Mentored 10 team members resulting in 3 internal promotions; reduced turnover 35% through structured career development pathways.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">2015 — 2017</div>
+        <div class="exp-tag">Leadership</div>
+        <div class="exp-location">Jakarta, Indonesia</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Room Service Captain Leader</div>
+        <div class="exp-company">Hotel Gran Melia Jakarta</div>
+        <ul class="exp-bullets">
+          <li>Led a 10-person team delivering 24/7 in-room dining excellence at a prestigious 500-room 5-star property with 95% order accuracy.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">2000 — 2015</div>
+        <div class="exp-tag">Foundation</div>
+        <div class="exp-location">Jakarta, Indonesia</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Progressive F&B Career</div>
+        <div class="exp-company">Hotel Gran Melia Jakarta — 14 Years</div>
+        <ul class="exp-bullets">
+          <li>Progressive 14-year ascent from Waiter to Captain across multiple prestigious outlets: Tien Chao, Yoshi Izakaya, Colvmbus Fine Dining, La Terraza, Café Gran Via, and Banquet MICE.</li>
+          <li>Built deep expertise in fine dining service protocols, MICE event management, and multi-outlet operations at one of Jakarta's flagship 5-star properties.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="gold-line-h"></div>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Core Competencies</div>
+      <h2 class="section-title">Areas of<br><em>Expertise</em></h2>
+    </div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-card fade-up">
+      <span class="skill-icon">◈</span>
+      <div class="skill-name">F&B Operations & P&L</div>
+      <div class="skill-desc">End-to-end management of food & beverage operations with sharp focus on profit optimization and cost control.</div>
+    </div>
+    <div class="skill-card fade-up" style="transition-delay:0.1s">
+      <span class="skill-icon">◈</span>
+      <div class="skill-name">Pre-Opening Leadership</div>
+      <div class="skill-desc">Proven expertise building departments from zero — SOPs, staffing, training, and operational launch.</div>
+    </div>
+    <div class="skill-card fade-up" style="transition-delay:0.2s">
+      <span class="skill-icon">◈</span>
+      <div class="skill-name">Revenue Optimization</div>
+      <div class="skill-desc">Data-driven menu engineering, upselling strategies and revenue programs delivering measurable YoY growth.</div>
+    </div>
+    <div class="skill-card fade-up" style="transition-delay:0.3s">
+      <span class="skill-icon">◈</span>
+      <div class="skill-name">Team Building & Training</div>
+      <div class="skill-desc">Building and mentoring high-performance teams with structured career development and reduced turnover.</div>
+    </div>
+    <div class="skill-card fade-up" style="transition-delay:0.4s">
+      <span class="skill-icon">◈</span>
+      <div class="skill-name">MICE & Banquet Events</div>
+      <div class="skill-desc">Coordinating large-scale banquet and MICE events with flawless execution and 95%+ guest satisfaction.</div>
+    </div>
+    <div class="skill-card fade-up" style="transition-delay:0.5s">
+      <span class="skill-icon">◈</span>
+      <div class="skill-name">HACCP & Food Safety</div>
+      <div class="skill-desc">Comprehensive knowledge of food safety standards, supplier management, and inventory control systems.</div>
+    </div>
+  </div>
+
+  <!-- Languages & Tech Tags -->
+  <div class="ornament">· · ·</div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:60px; margin-top:40px;">
+    <div class="fade-up">
+      <div class="section-tag" style="margin-bottom:24px">Languages</div>
+      <div class="tags-row">
+        <span class="tag gold">Bahasa Indonesia</span>
+        <span class="tag gold">English — Fluent</span>
+        <span class="tag">German — Basic</span>
+        <span class="tag">French — Basic</span>
+      </div>
+    </div>
+    <div class="fade-up" style="transition-delay:0.15s">
+      <div class="section-tag" style="margin-bottom:24px">Technology</div>
+      <div class="tags-row">
+        <span class="tag gold">Opera PMS</span>
+        <span class="tag gold">MICROS POS</span>
+        <span class="tag">MS Office Suite</span>
+        <span class="tag">Google Workspace</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Education -->
+  <div style="margin-top:80px" class="fade-up">
+    <div class="section-tag" style="margin-bottom:32px">Education</div>
+    <div class="edu-card">
+      <div class="edu-year">2000<br>– 2001</div>
+      <div>
+        <div class="edu-degree">Management of Information</div>
+        <div class="edu-school">Universitas Terbuka · Jakarta, Indonesia</div>
+        <p style="font-size:0.78rem; color:var(--cream-muted); line-height:1.7; opacity:0.7;">Foundation in management principles and information systems, complemented by 20+ years of continuous professional development in luxury hospitality.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line-h"></div>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner fade-up">
+    <div class="section-tag" style="margin-bottom:16px">Let's Connect</div>
+    <h2 class="section-title" style="font-size:clamp(2rem,4vw,3rem)">Open to New<br><em>Opportunities</em></h2>
+    <p style="margin-top:24px; font-size:0.82rem; color:var(--cream-muted); line-height:1.9; max-width:480px; margin-left:auto; margin-right:auto;">
+      Seeking an F&B Manager role to drive operational excellence and measurable growth at a distinguished luxury property.
+    </p>
+
+    <div class="contact-links">
+      <a href="mailto:dian.ariza79@gmail.com" class="contact-link">
+        <div class="contact-link-icon">✉</div>
+        <div class="contact-link-label">Email</div>
+      </a>
+      <a href="tel:+6289663878109" class="contact-link">
+        <div class="contact-link-icon">📞</div>
+        <div class="contact-link-label">Phone</div>
+      </a>
+      <a href="https://linkedin.com/in/dian-ariza" target="_blank" class="contact-link">
+        <div class="contact-link-icon">in</div>
+        <div class="contact-link-label">LinkedIn</div>
+      </a>
+      <a href="#" class="contact-link">
+        <div class="contact-link-icon">📍</div>
+        <div class="contact-link-label">Jakarta, ID</div>
+      </a>
+    </div>
+
+    <div style="margin-top:60px; padding-top:40px; border-top:1px solid rgba(201,168,76,0.1);">
+      <div class="section-tag" style="margin-bottom:20px; text-align:center;">Selected References</div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:700px; margin:0 auto;">
+        <div style="text-align:center; padding:20px;">
+          <div style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; color:var(--cream); margin-bottom:4px;">Eduard R. Pangkerego</div>
+          <div style="font-size:0.6rem; color:var(--gold-dim); letter-spacing:0.1em; text-transform:uppercase;">COO, Artotel Group Indonesia</div>
+        </div>
+        <div style="text-align:center; padding:20px;">
+          <div style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; color:var(--cream); margin-bottom:4px;">Imran Beny Berlian</div>
+          <div style="font-size:0.6rem; color:var(--gold-dim); letter-spacing:0.1em; text-transform:uppercase;">GM, Dafam Enkadeli Thamrin</div>
+        </div>
+        <div style="text-align:center; padding:20px;">
+          <div style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; color:var(--cream); margin-bottom:4px;">Roheman</div>
+          <div style="font-size:0.6rem; color:var(--gold-dim); letter-spacing:0.1em; text-transform:uppercase;">GM, Swisbell Hotel Panakukang</div>
+        </div>
+      </div>
+      <p style="font-size:0.62rem; color:var(--cream-muted); opacity:0.4; margin-top:16px; letter-spacing:0.1em; text-transform:uppercase;">Full reference list available on request</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Dian Ariza · F&B Manager</div>
+  <div class="footer-copy">Jakarta, Indonesia · dian.ariza79@gmail.com · +62 896 6387 8109</div>
+</footer>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up, .exp-item').forEach(el => observer.observe(el));
+
+  // Smooth gold counter animation
+  const animateCounters = () => {
+    const metrics = document.querySelectorAll('.metric-num');
+    metrics.forEach(m => {
+      m.style.opacity = '0';
+      m.style.transform = 'translateY(20px)';
+      m.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+  };
+
+  const metricObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.metric-item').forEach(item => metricObserver.observe(item));
+</script>
+</body>
+</html>
