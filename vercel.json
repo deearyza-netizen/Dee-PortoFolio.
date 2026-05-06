@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "Dian_Ariza_Portfolio_CSS.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/Dian_Ariza_Portfolio_CSS.html"
+    }
+  ]
+}
